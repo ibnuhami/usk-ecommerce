@@ -56,9 +56,11 @@
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
-                            <x-dropdown-link :href="route('dashboard')">
-                                {{ __('Dashboard') }}
-                            </x-dropdown-link>
+                            @if (auth()->user()->user_type == 'admin')
+                                <x-responsive-nav-link :href="route('dashboard')">
+                                    {{ __('Dashboard') }}
+                                </x-responsive-nav-link>
+                            @endif
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
@@ -137,9 +139,11 @@
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
-                    <x-responsive-nav-link :href="route('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-responsive-nav-link>
+                    @if (auth()->user()->user_type == 'admin')
+                        <x-responsive-nav-link :href="route('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-responsive-nav-link>
+                    @endif
 
                     <!-- Authentication -->
                     <form method="POST" action="{{ route('logout') }}">

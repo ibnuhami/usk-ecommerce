@@ -18,8 +18,6 @@ class ProductController extends Controller
     }
     public function getProductByStore()
     {
-        Log::info('Get All Product');
-
         $data = (new ProductRepository)->getProductByStore(auth()->user()->store->id);
         return (new Response)->json(1, 'Success Get Data By Store', 200, $data);
     }

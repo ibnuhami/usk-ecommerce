@@ -37,7 +37,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/report/pdf/order-transaction/{order_id}', [PdfController::class, 'reportPaymentOrder'])->name('reportPaymentOrder');
 
     Route::get('/order', [OrderController::class, 'orderPage'])->name('orderPage');
+    Route::get('/order/by-store/{storeId}', [OrderController::class, 'orderAdminList'])->name('orderAdminList');
     Route::delete('/order/delete/{id}', [OrderController::class, 'cancelOrder'])->name('cancelOrder');
+    Route::put('/order/confirm/{orderId}', [OrderController::class, 'confirmOrder'])->name('confirmOrder');
 });
 
 Route::middleware('auth')->group(function () {

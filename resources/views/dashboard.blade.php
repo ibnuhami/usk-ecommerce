@@ -6,6 +6,7 @@
     </x-slot>
 
     @if (auth()->user()->user_type == $admin)
-        @include('dashboard-partial.product-list')
+    @include('dashboard-partial.product-list')
+    @include('dashboard-partial.product-order')
     @endif
 </x-app-layout>

@@ -12,16 +12,16 @@ class StoreRepository
     public function verifyAccount($data, $userId)
     {
         DB::transaction(function () use ($data, $userId) {
-            $data =
             $payload = [
                 'user_id' => $userId,
                 'store_name' => $data['store_name'],
                 'store_address' => $data['store_address'],
             ];
+            $storeId = Store::insertGetId(values: $payload);
             User::where('id', $userId)->update([
-                'user_type' => UserType::Admin->value
+                'user_type' => UserType::Admin->value,
+                'store_id' => $storeId
             ]);
-            Store::insert($payload);
         });
 
         return (new Response)->json(1, 'Account verified', 200);

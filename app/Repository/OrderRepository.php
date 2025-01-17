@@ -12,7 +12,9 @@ class OrderRepository
             return "User ID Not Found";
         return Order::where('user_id', $userId)
             ->where('status', OrderStatus::PENDING->value)
-            ->with('product')
+            ->orWhere('status', OrderStatus::CONFIRM->value)
+            ->orWhere('status', OrderStatus::PAID->value)
+            ->with(['product', 'user'])
             ->get();
     }
     public function insertOrder($data)
@@ -36,7 +38,7 @@ class OrderRepository
     public function updateToSuccess($id)
     {
         return Order::where('id', $id)
-            ->update(['status' => OrderStatus::SUCCESS->value]);
+            ->update(['status' => OrderStatus::PAID->value]);
     }
     public function rollbackTransaction($id)
     {
@@ -47,5 +49,19 @@ class OrderRepository
     {
         return Order::where('id', $id)
             ->delete();
+    }
+    public function getOrderByStore($storeId)
+    {
+        if (!$storeId)
+            return 'Store ID Not Found';
+        return Order::where('store_id', $storeId)
+            ->with(['product', 'user'])
+            ->where('status', OrderStatus::PAID->value)
+            ->get();
+    }
+    public function approveOrder($id)
+    {
+        return Order::where('id', $id)
+            ->update(['status' => OrderStatus::CONFIRM->value]);
     }
 }

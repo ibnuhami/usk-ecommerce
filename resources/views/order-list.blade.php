@@ -1,3 +1,7 @@
+<?php
+use App\Enum\OrderStatus;
+?>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -12,9 +16,18 @@
                     <div class="border p-4 my-4 bg-white">
                         <p class="text-lg font-bold"> Product Name : {{ $item->product->product_name }}</p>
                         <p class="text-sm">Pay : {{ $item->total }}</p>
+                        <p class="text-sm">Status :
+                            @if ($item->status == OrderStatus::PAID->value)
+                                Already Paid
+                            @elseif($item->status == OrderStatus::CONFIRM->value)
+                                Confirm By Store
+                            @else
+                                Unpaid
+                            @endif
+                        </p>
                         <div class="grid grid-cols-2 mt-5 gap-5">
                             <x-link
-                                href="{{ route('checkoutTransactionPage', $item->cart_id) }}">{{ __('Go To Transaction') }}</x-link>
+                                href="{{ route('checkoutTransactionPage', $item->cart_id) }}">{{ __('Payment') }}</x-link>
                             <form action="{{ route('cancelOrder', $item->id) }}" method="post">
                                 @method('delete')
                                 @csrf

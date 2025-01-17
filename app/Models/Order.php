@@ -22,7 +22,7 @@ class Order extends Model
 
     public function store()
     {
-        return $this->belongsTo(Store::class, '');
+        return $this->belongsTo(Store::class, 'store_id', 'id');
     }
     public function transaction()
     {
