@@ -45,4 +45,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function store()
+    {
+        return $this->hasOne(Store::class, 'user_id', 'id');
+    }
+    public function transaction()
+    {
+        return $this->hasMany(Transaction::class, 'user_id', 'id');
+    }
 }

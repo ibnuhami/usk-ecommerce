@@ -9,7 +9,7 @@
         "@tailwindcss/forms": "^0.5.2",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^1.7.4",
+        "axios": "^1.7.9",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
@@ -20,6 +20,7 @@
     "dependencies": {
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "datatables.net-dt": "^2.2.0",
         "lucide-react": "^0.469.0",
         "tailwind-merge": "^2.6.0",
         "tailwindcss-animate": "^1.0.7"
