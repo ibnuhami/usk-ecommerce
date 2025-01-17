@@ -909,7 +909,7 @@
 <body>
     @include('components.navbar')
 
-    <div class="content p-5">
+    <div class="content p-5 mx-50">
         @yield('content')
     </div>
 </body>

@@ -44,4 +44,12 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    /**
+     * Get the CSRF token.
+     */
+    public function getCsrfToken()
+    {
+        return response()->json(['csrf_token' => csrf_token()]);
+    }
 }

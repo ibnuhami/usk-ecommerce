@@ -8,8 +8,10 @@ class Cart extends Model
 {
     protected $table = 'carts';
 
-    public function scopeUserCarts($query, $userId)
-    {
-        return $query->where('user_id', $userId);
+    public function product(){
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
+    public function order(){
+        return $this->belongsTo(Order::class, 'cart_id');
     }
 }
