@@ -73,4 +73,20 @@ class TransactionController extends Controller
             return view('transaction.callback-failed-transaction')->with('message', 'Failed Transaction your Order');
         }
     }
-}
+    public function cancelPayment(Request $request)
+    {
+        try {
+            $cartId = $request->input('cart_id');
+            $orderId = $request->input('order_id');
+            DB::beginTransaction();
+            (new CartRepository)->deleteCart($cartId);
+            (new OrderRepository)->rollbackTransaction($orderId);
+            DB::commit();
+            return redirect()->route('cartPage')->with('message', 'Cancel Payment Success');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            Log::info($e->getMessage());
+            return redirect()->route('cartPage')->with('message', 'Cancel Payment Failed');
+        }
+    }
+ }

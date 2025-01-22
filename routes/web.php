@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/order-checkout/{cartId}', [TransactionController::class, 'checkoutTransactionPage'])->name('checkoutTransactionPage');
     Route::match(['post', 'get'],'/transaction-payment', [TransactionController::class, 'createTransactionPayment'])->name('transactionPayment');
     Route::post('/transaction-paid', [TransactionController::class, 'paidOrder'])->name('transactionPaid');
+    Route::delete('/cancel-payment', [TransactionController::class, 'cancelPayment'])->name('cancelPayment');
 
     Route::post('/report/pdf/order-transaction/{order_id}', [PdfController::class, 'reportPaymentOrder'])->name('reportPaymentOrder');
 
