@@ -19,8 +19,10 @@
                     <input type="hidden" name="order_id" value="{{ $order->id }}">
                     <x-primary-button type="submit">{{ __('Paid') }}</x-primary-button>
                 </form>
-                <form action="{{ route('transactionPayment') }}" method="post" class="inline-block">
+                <form action="{{ route('cancelPayment') }}" method="post" class="inline-block">
                     @csrf
+                    <input type="hidden" name="cart_id" value="{{ $cart->id }}">
+                    <input type="hidden" name="order_id" value="{{ $order->id }}">
                     <x-secondary-button type="submit">{{ __('Cancel Paid') }}</x-secondary-button>
                 </form>
             </div>
